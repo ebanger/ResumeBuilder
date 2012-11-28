@@ -1,0 +1,3 @@
+[26-Nov-2012 16:27:32] PHP Fatal error:  Call to undefined function  get_header() in /home8/themaro0/public_html/dev1/wp-content/themes/flare/index.php on line 14
+[26-Nov-2012 16:27:34] PHP Fatal error:  Call to undefined function  get_header() in /home8/themaro0/public_html/dev1/wp-content/themes/flare/index.php on line 14
+[26-Nov-2012 16:27:35] PHP Fatal error:  Call to undefined function  get_header() in /home8/themaro0/public_html/dev1/wp-content/themes/flare/index.php on line 14
