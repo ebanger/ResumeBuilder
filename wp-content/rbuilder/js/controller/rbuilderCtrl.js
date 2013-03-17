@@ -2,11 +2,9 @@
 
 /* This is the controller */
 
-rbuildermvc.controller('rbuilderCtrl', function rbuilderCtrl($scope, $location, rbuilderStorage, filterFilter){
+rbuildermvc.controller('rbuilderCtrl', function rbuilderCtrl($scope, rbuilderStorage) {
 	// do stuff
-	$scope.candidate-name = "test";
-	$scope.school ="test";
-	$scope.gpa = 0.0;
+	var resume = $scope.resume = rbuilderStorage.get();
 
 	/* Phien: list of functions */
 	$scope.addName = function() {
@@ -20,5 +18,4 @@ rbuildermvc.controller('rbuilderCtrl', function rbuilderCtrl($scope, $location, 
 	$scope.addGPA = function() {
 
 	}
-
-}
+});
