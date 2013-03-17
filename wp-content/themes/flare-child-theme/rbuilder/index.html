@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" ng-app="rbuildermvc">
+<head>
+  <title>Rbuilder MVC</title>
+  <style>
+  [ng-cloak] {display: none}
+  </style>
+
+
+</head>
+
+<body>
+	<section id="rbuilderapp" style="height:842px;width:595px;margin-left:auto;margin-right:auto;border:1px solid black;" ng-controller="rbuilderCtrl" >
+		<header id="header" align="center">
+			<h1>{{resume.name}}</h1>
+		</header>
+
+		<section id="contact" align="center">
+			<label>{{resume.street}}</label>
+		</section>
+
+		<section id="Education" style="margin-left:25px;margin-right=25px">
+			<h2>Education</h2>
+
+			<ul ui:sortable ng-model="resume.education">
+				<li ng-repeat="school in resume.education" class="school">
+					{{school.schoolName}}
+					GPA: {{school.gpa}}
+				</li>
+			</ul>
+		
+		</section>
+
+		<section id="Employement" style="margin-left:25px;margin-right=25px">
+			<h2>Employement</h2>
+			<div ng-model="resume.employment">
+				<div ng-repeat="job in resume.employment" class="job">
+					{{job.companyName}} 
+					<li>Title: {{job.jobTitle}}</li>
+					<li>Begin Date: {{job.beginDate}}</li>
+				</div>
+			</div>
+
+		
+		</section>
+	</section>
+
+
+
+	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/libs/angular.js"></script>
+	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/app.js"></script>
+	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/controller/rbuilderCtrl.js"></script>
+	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/model/rbuilderModel.js"></script>
+</body>
+</html>
+
+
+

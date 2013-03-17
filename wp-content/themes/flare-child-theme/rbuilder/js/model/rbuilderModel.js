@@ -6,7 +6,7 @@ rbuildermvc.factory('rbuilderStorage', function () {
     return {
         get: function() {
             return {   
-                name: 'John',
+                name: 'John Doe',
                 userID: 1,
                 resumeID: 1,
                 street: '123 Street St.',
