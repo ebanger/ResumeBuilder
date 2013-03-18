@@ -1,11 +1,28 @@
 <!doctype html>
 <html lang="en" ng-app="rbuildermvc">
 <head>
-  <title>Rbuilder MVC</title>
-  <style>
-  [ng-cloak] {display: none}
-  </style>
+	<meta charset="utf-8" />
 
+  	<title>Rbuilder MVC</title>
+  	<style>
+  		[ng-cloak] {display: none}
+  	</style>
+
+  	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/libs/angular.js"></script>
+	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/app.js"></script>
+	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/controller/rbuilderCtrl.js"></script>
+	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/model/rbuilderModel.js"></script>
+
+		
+	<script>
+  		$(function() {
+    	$( "#rbuilderapp" ).sortable();
+    	$( "#rbuilderapp" ).disableSelection();
+  		});
+  	</script>
 
 </head>
 
@@ -45,12 +62,6 @@
 		</section>
 	</section>
 
-
-
-	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/libs/angular.js"></script>
-	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/app.js"></script>
-	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/controller/rbuilderCtrl.js"></script>
-	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/model/rbuilderModel.js"></script>
 </body>
 </html>
 
