@@ -15,7 +15,6 @@
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/app.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/controller/rbuilderCtrl.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/model/rbuilderModel.js"></script>
-
 		
 	<script>
   		$(function() {
@@ -36,7 +35,7 @@
 			<label>{{resume.street}}</label>
 		</section>
 
-		<section id="Education" style="margin-left:25px;margin-right=25px">
+		<section id="Education" style="margin-left:25px;margin-right:25px;border:1px solid black">
 			<h2>Education</h2>
 
 			<ul ui:sortable ng-model="resume.education">
@@ -48,7 +47,7 @@
 		
 		</section>
 
-		<section id="Employement" style="margin-left:25px;margin-right=25px">
+		<section id="Employment" style="margin-left:25px;margin-right:25px;border:1px solid black">
 			<h2>Employement</h2>
 			<div ng-model="resume.employment">
 				<div ng-repeat="job in resume.employment" class="job">
@@ -64,6 +63,3 @@
 
 </body>
 </html>
-
-
-
