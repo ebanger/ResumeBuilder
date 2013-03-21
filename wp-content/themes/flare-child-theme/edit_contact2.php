@@ -16,26 +16,24 @@
 		<div id="content-inner" class="<?php echo btp_content_get_class(); ?>">
 
 			<div class="grid">
-				<!--
 				<article id="post-<?php the_ID(); ?>" <?php post_class( 'c-three-fourth' ); ?>>									
 
 					<div class="entry-content">	
 
-						<?php include ('custompages/editcontact.html'); //the_content() ?>
+						<?php include ('custompages/editcontact.html'); ?>
 
 						<?php btp_wp_link_pages(); ?>
 
-					</div><!- .entry-content -->
-					<!--
+					</div><!-- .entry-content -->
+					
 					<div class="entry-utility">		
 
 						<?php edit_post_link( __( 'Edit', 'btp_theme' ), '<span class="edit-link">', '</span>' ); ?>
 
-					</div><!- .entry-utility -->
-				<!--
-				</article> -->
+					</div><!-- .entry-utility -->
+	
+				</article> 
 
-				<?php include ('custompages/editcontact.html'); ?>
 
 				<aside class="c-one-fourth sidebar after">
 
