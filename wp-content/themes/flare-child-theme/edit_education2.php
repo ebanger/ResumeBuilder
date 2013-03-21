@@ -2,7 +2,7 @@
 
 /*
 
- * Template Name: Edit Education
+ * Template Name: Edit Education 2
 
  *
 
