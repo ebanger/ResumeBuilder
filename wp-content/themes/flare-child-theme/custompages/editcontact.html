@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+
+
+<script>
+$.fn.serializeObject = function()
+{
+   var o = {};
+   var a = this.serializeArray();
+   $.each(a, function() {
+       if (o[this.name] !== undefined) {
+           if (!o[this.name].push) {
+               o[this.name] = [o[this.name]];
+           }
+           o[this.name].push(this.value || '');
+       } else {
+           o[this.name] = this.value || '';
+       }
+   });
+   return o;
+};
+
+$(function() {
+   $('form').submit(function() {
+       $('#result').text(JSON.stringify($('form').serializeObject()));
+       return false;
+   });
+});
+</script>
+
+</head>
+
+
+<form action="" method="post">
+<p><strong>Street Address: </strong><br/>
+<input type="text" name ="address1" maxlength="75" size="75" /> </br>
+<input type="text" name ="address2" maxlength="75" size="75" />
+</p>
+    
+<p><strong>City:</strong><br/>
+<input type="text" name="city" maxlength="20" size="20" /> </br>
+</p>
+    
+<p><strong>State:</strong><br/>
+<input type="text" name="state" maxlength="20" size="20" /> </br>
+</p>
+
+<p><strong>Country:</strong><br/>
+<input type="text" name="country" maxlength="30" size="30" /> </br>
+</p>
+
+<p><strong>Postal Code:</strong><br/>
+<input type="text" name="zip" maxlength="6" size="6" /> </br>
+</p>
+
+<p><strong>Primary Phone:</strong><br/>
+<input type="text" name="primaryPhone" maxlength="10" size="10" /> </br>
+</p>
+
+<p><strong>Secondary Phone:</strong><br/>
+<input type="text" name="secondaryPhone" maxlength="10" size="10" /> </br>
+</p>
+
+<p><strong>Email Address:</strong><br/>
+<input type="text" name="email" > </br>
+</p>
+
+<p><input type="submit" /></p>
+</form>
+<h2>JSON</h2>
+<pre id="result">
+</pre>
+
+</html>
