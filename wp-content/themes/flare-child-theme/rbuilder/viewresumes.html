@@ -1,27 +1,62 @@
 <!doctype html>
-<html>
+<html lang = "en" ng-app="rbuildermvc">
 <head>
+	<meta charset="utf-8" />
+
+  	<title>My Resumes</title>
+  	<style>
+  		[ng-cloak] {display: none}
+  		#resumeDiv{margin: 25; width: 400px; height: 100px; border: 1px solid black;}
+  		#resumeLabel{margin-right:5px;margin-top:5px;}
+  		#resumeOptions{margin-right:5;margin-left:5px;margin-top:5px;margin-bottom:5;}
+  	</style>
+
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+	<!--
+	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/libs/angular.js"></script>
+	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/app.js"></script>
+	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/controller/rbuilderCtrl.js"></script>
+	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/model/rbuilderModel.js"></script>
+	-->
+	
 </head>
 
 <body>
 	<h1>Resumes</h1>
 	<section>
-		<div style="height:180px;width:300px;widthmargin-left:25pix;margin-right:25px;margin-bottom:25px;margin-top:25px;border: 1px solid black">
-			Resume 1<br>
-			<form action="/rbuilder/">
-				<input type="submit" value="View Resume">
-			</form>
+		<div id="resumeDiv">
+			<label for="toggler">Resume 1</label>
+				<div id="resumeOptions">
+					<form action="/rbuilder/">
+						<input type="submit" value="View">
+						<input type="submit" value="Edit">
+						<input type="submit" value="Delete">
+					</form>
+				</div>
 		</div>
+		<!--
 		<div style="height:180px;width:300px;widthmargin-left:25pix;margin-right:25px;margin-bottom:25px;margin-top:25px;border: 1px solid black">
 			Resume 2<br>
 			<form action="/rbuilder/">
 				<input type="submit" value="View Resume">
 			</form>
-		</div>
+		</div>-->
 	</section>
+	<br>
 	<form action="/build-a-resume/">
 		<input type="submit" value="Create New Resume">
 	</form>
-</body>
 
+
+	<script>
+	$(resumeOptions).toggle(0);
+	$( '#resumeDiv' ).click(function() {
+  		$( '#resumeOptions' ).toggle( 200 );
+	});
+	</script>
+
+
+	
+</body>
 </html>
