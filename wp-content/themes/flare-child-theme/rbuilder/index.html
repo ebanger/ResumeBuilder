@@ -11,11 +11,25 @@
   	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
 
+	<script src="js/libs/angular.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controller/rbuilderCtrl.js"></script>
+	<script src="js/model/rbuilderModel.js"></script>
+
+	<!-- uncomment for local dev
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+	<script src="js/libs/angular.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controller/rbuilderCtrl.js"></script>
+	<script src="js/model/rbuilderModel.js"></script>
+	-->
+
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/libs/angular.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/app.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/controller/rbuilderCtrl.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/model/rbuilderModel.js"></script>
-		
 	<script>
   		$(function() {
     	$( "#rbuilderapp" ).sortable();
@@ -32,25 +46,25 @@
 		</header>
 
 		<section id="contact" align="center">
-			<label>{{resume.street}}</label>
+			<label>{{resume.currentResume[0].street}}</label>
 		</section>
 
 		<section id="Education" style="margin-left:25px;margin-right:25px;border:1px solid black">
 			<h2>Education</h2>
 
-			<ul ui:sortable ng-model="resume.education">
-				<li ng-repeat="school in resume.education" class="school">
+			<div ui:sortable ng-model="resume.currentResume[0].education" style="padding:0.5em">
+				<div ng-repeat="school in resume.currentResume[0].education" class="school">
 					{{school.schoolName}}
-					GPA: {{school.gpa}}
-				</li>
-			</ul>
+					<li>GPA: {{school.gpa}}</li>
+				</div>
+			</div>
 		
 		</section>
 
 		<section id="Employment" style="margin-left:25px;margin-right:25px;border:1px solid black">
 			<h2>Employement</h2>
-			<div ng-model="resume.employment">
-				<div ng-repeat="job in resume.employment" class="job">
+			<div ng-model="resume.currentResume[0].employment" style="padding:0.5em">
+				<div ng-repeat="job in resume.currentResume[0].employment" class="job">
 					{{job.companyName}} 
 					<li>Title: {{job.jobTitle}}</li>
 					<li>Begin Date: {{job.beginDate}}</li>

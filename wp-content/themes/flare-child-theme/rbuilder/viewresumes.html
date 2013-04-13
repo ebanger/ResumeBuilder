@@ -9,54 +9,60 @@
   		#resumeDiv{margin: 25; width: 400px; height: 100px; border: 1px solid black;}
   		#resumeLabel{margin-right:5px;margin-top:5px;}
   		#resumeOptions{margin-right:5;margin-left:5px;margin-top:5px;margin-bottom:5;}
+  		#feedback { font-size: 1.4em; }
+  		#resumesList .ui-selecting { background: #FECA40; }
+  		#resumesList .ui-selected { background: #F39814; color: white; }
+ 		#resumesList { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  		#resumesList div { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 100px; }
   	</style>
-
+  	<!-- uncomment for local dev
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-	<!--
+
+	<script src="js/libs/angular.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controller/rbuilderCtrl.js"></script>
+	<script src="js/model/rbuilderModel.js"></script>
+	-->
+
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/libs/angular.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/app.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/controller/rbuilderCtrl.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/model/rbuilderModel.js"></script>
-	-->
 	
+	
+	<script>
+	$(function() {
+    $( "#resumesList" ).selectable();
+  	});
+  	$('#resumeDiv').toggle(0);
+	$( '#resumeDiv' ).click(function() {
+  		$( '#resumeOptions' ).toggle( 200 );
+	});
+	</script>
 </head>
 
 <body>
-	<h1>Resumes</h1>
-	<section>
-		<div id="resumeDiv">
-			<label for="toggler">Resume 1</label>
-				<div id="resumeOptions">
-					<form action="/rbuilder/">
-						<input type="submit" value="View">
-						<input type="submit" value="Edit">
-						<input type="submit" value="Delete">
-					</form>
-				</div>
+	<section id="rbuilderapp" style="height:842px;width:595px;margin-left:auto;margin-right:auto;border:1px solid black;" ng-controller="rbuilderCtrl" >
+	<h1>Resumes for {{resume.name}}</h1>
+	<section id="resumesList" ng-model="resume.resumeList">
+		<div id="resumeDiv" ng-repeat="resumes in resume.resumeList" class="resumes">
+			<label>Resume ID: {{resumes.resumeID}}</label> <br>
+			<label>Resume Type: {{resumes.jobPosition}}</label>
+			<div id="resumeOptions">
+				<form action="/rbuilder/">
+					<input type="submit" value="View">
+					<input type="submit" value="Edit">
+					<input type="submit" value="Delete">
+				</form>
+			</div>
 		</div>
-		<!--
-		<div style="height:180px;width:300px;widthmargin-left:25pix;margin-right:25px;margin-bottom:25px;margin-top:25px;border: 1px solid black">
-			Resume 2<br>
-			<form action="/rbuilder/">
-				<input type="submit" value="View Resume">
-			</form>
-		</div>-->
 	</section>
 	<br>
 	<form action="/build-a-resume/">
 		<input type="submit" value="Create New Resume">
 	</form>
-
-
-	<script>
-	$(resumeOptions).toggle(0);
-	$( '#resumeDiv' ).click(function() {
-  		$( '#resumeOptions' ).toggle( 200 );
-	});
-	</script>
-
-
+</section>
 	
 </body>
 </html>
