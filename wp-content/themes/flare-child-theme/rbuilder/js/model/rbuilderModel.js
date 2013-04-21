@@ -32,6 +32,20 @@ rbuildermvc.factory('rbuilderStorage', function () {
             return resume;
         },
 
+        getResume: function(resumeID)
+        {
+            var resume;
+            $.ajax({
+                type: "GET".
+                url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/getResume.php",
+                async: false,
+                data: { 'resumeID': resumeID },
+                success: function(data){
+                    resume = jQuery.parseJSON(data);
+                }
+            });
+        }
+
         put: function(resume)
         {
             $.ajax({
