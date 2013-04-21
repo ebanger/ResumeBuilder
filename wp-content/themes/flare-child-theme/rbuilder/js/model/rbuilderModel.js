@@ -41,6 +41,16 @@ rbuildermvc.factory('rbuilderStorage', function () {
                 async: false
 
             });
+        },
+
+        update: function(resume, resumeID)
+        {
+            $. ajax({
+                type: "POST",
+                url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/updateData.php",
+                data: { 'resume': resume, 'resumeID': resumeID }.
+                async: false
+            });
         }
      
     };
