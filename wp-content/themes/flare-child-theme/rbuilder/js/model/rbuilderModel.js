@@ -48,7 +48,7 @@ rbuildermvc.factory('rbuilderStorage', function () {
             $. ajax({
                 type: "POST",
                 url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/updateData.php",
-                data: { 'resume': resume, 'resumeID': resumeID }.
+                data: { 'resume': resume, 'resumeID': resumeID },
                 async: false
             });
         }
