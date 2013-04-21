@@ -41,14 +41,14 @@
 		</header>
 
 		<section id="contact" align="center">
-			<label>{{resume.currentResume[0].street}}</label>
+			<label>{{resume.street}}</label>
 		</section>
 
 		<section id="Education" style="margin-left:25px;margin-right:25px;border:1px solid black">
 			<h2>Education</h2>
 
-			<div ui:sortable ng-model="resume.currentResume[0].education" style="padding:0.5em">
-				<div ng-repeat="school in resume.currentResume[0].education" class="school">
+			<div ui:sortable ng-model="resume.currentResume.education" style="padding:0.5em">
+				<div ng-repeat="school in resume.currentResume.education" class="school">
 					{{school.schoolName}}
 					<li>GPA: {{school.gpa}}</li>
 				</div>
@@ -58,8 +58,8 @@
 
 		<section id="Employment" style="margin-left:25px;margin-right:25px;border:1px solid black">
 			<h2>Employement</h2>
-			<div ng-model="resume.currentResume[0].employment" style="padding:0.5em">
-				<div ng-repeat="job in resume.currentResume[0].employment" class="job">
+			<div ng-model="resume.currentResume.employment" style="padding:0.5em">
+				<div ng-repeat="job in resume.currentResume.employment" class="job">
 					{{job.companyName}} 
 					<li>Title: {{job.jobTitle}}</li>
 					<li>Begin Date: {{job.beginDate}}</li>
