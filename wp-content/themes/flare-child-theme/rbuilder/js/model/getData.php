@@ -6,7 +6,7 @@
 		//$current_user = wp_get_current_user();
         $current_user = 'sam@jackson.com';
 		$link = mysql_connect('localhost', 'themaro0_dev1', 'buildaresume!1');
-		if (!link)
+		if (!$link)
         {
 			die('Could not connect: ' . mysql_error());
 		}
@@ -38,7 +38,7 @@
         //Acquire Education Information//
         $query = sprintf("SELECT educationID, schoolName, gpa from education where userID='" . $current_ID . "'");
         $result = mysql_query($query);
-        if(!result)
+        if(!$result)
         {
             die('Could not query: ' . mysql_error());
         }
@@ -52,7 +52,7 @@
         //Acquire Employment Information//
         $query = sprintf("SELECT companyName, jobTitle, beginDate from employment where userID='" . $current_ID . "'");
         $result = mysql_query($query);
-        if(!result)
+        if(!$result)
         {
             die('Could not query: ' . mysql_error());
         }
