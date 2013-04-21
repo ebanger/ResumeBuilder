@@ -41,7 +41,7 @@ rbuildermvc.factory('rbuilderStorage', function () {
                 async: false
 
             });
-        },
+        }
      
     };
 });
