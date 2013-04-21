@@ -49,52 +49,33 @@
             $edu[] = $r;
         }
 
+        //Acquire Employment Information//
+        $query = sprintf("SELECT companyName, jobTitle, beginDate from employment where userID='" . $current_ID . "'");
+        $result = mysql_query($query);
+        if(!result)
+        {
+            die('Could not query: ' . mysql_error());
+        }
+
+        $emp = array();
+        while($r = mysql_fetch_assoc($result))
+        {
+            $emp[] = $r;
+        }
+
+
+
+        $education = array('education'=>$edu);
+        $employment = array('employment'=>$emp);
+        $subResume = array_merge($education,$employment);
+        $currentResume = array('currentResume'=>$subResume);
+        $basics = array_merge($basics, $currentResume);
+
         //Print out JSON Objects
         echo json_encode($basics);
-        //echo "var testjson = " . json_encode($basics) . ";";
-        //echo json_encode($edu);
 		mysql_close($link); 
 	}
 
     getData();
 
-/*
-                name: 'John Doe',
-                userID: 1,
-                resumeID: 1,
-                street: '123 Street St.',
-                education: [
-                    {
-                        educationID: '1', 
-                        schoolName: 'ASU',
-                        gpa: 3.2,
-                        include: 'false',
-                        position: -1
-                    },
-                    {
-                        educationID: '2',
-                        schoolName: 'UofA',
-                        gpa: 2.0,
-                        include: 'false',
-                        position: -1
-                    }
-                ],
-                employment: [
-                    {
-                        employmentID: '12',
-                        companyName: 'Pizza Hut',
-                        jobTitle: 'Assistant Manager',
-                        beginDate: '2008-01-02',
-                        include: 'false',
-                        position: -1
-                    },
-                    {
-                        employmentID: '13',
-                        companyName: 'Boeing',
-                        jobTitle: 'Engineer',
-                        beginDate: '2009-03-05',
-                        include: 'false',
-                        position: -1
-                    }
-*/
 ?>
