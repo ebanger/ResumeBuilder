@@ -27,8 +27,8 @@
 	
 	<script>
   		$(function() {
-    	$( "#rbuilderapp" ).sortable();
-    	$( "#rbuilderapp" ).disableSelection();
+    	$( "#resumeBody" ).sortable();
+    	$( "#resumeBody" ).disableSelection();
   		});
   	</script>
 
@@ -36,6 +36,7 @@
 
 <body>
 	<section id="rbuilderapp" style="height:842px;width:595px;margin-left:auto;margin-right:auto;border:1px solid black;" ng-controller="rbuilderCtrl" >
+		<input type="submit" ng-click="setName()" value="change">
 		<header id="header" align="center">
 			<h1>{{resume.name}}</h1>
 		</header>
@@ -43,7 +44,7 @@
 		<section id="contact" align="center">
 			<label>{{resume.street}}</label>
 		</section>
-
+		<section id="resumeBody">
 		<section id="Education" style="margin-left:25px;margin-right:25px;border:1px solid black">
 			<h2>Education</h2>
 
@@ -67,6 +68,7 @@
 			</div>
 
 		
+		</section>
 		</section>
 	</section>
 
