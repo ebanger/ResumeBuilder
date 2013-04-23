@@ -7,7 +7,10 @@ rbuildermvc.controller('rbuilderCtrl', function rbuilderCtrl($scope, rbuilderSto
 	var resume = $scope.resume = rbuilderStorage.get();
 
 
-	$scope.getResumes = function(){}
+	$scope.setName = function(){
+		resume.name = 'Jerry';
+		rbuilderStorage.put(resume);
+	}
 
 	$scope.selectResume = function(){}
 
