@@ -17,7 +17,7 @@ rbuildermvc.factory('rbuilderStorage', function () {
                     resume = jQuery.parseJSON(data);
 
                 }
-                });        
+            });        
             
             /*
             $.ajax({
@@ -44,6 +44,24 @@ rbuildermvc.factory('rbuilderStorage', function () {
                     resume = jQuery.parseJSON(data);
                 }
             });
+
+            return resume;
+        },
+
+        getResumeList: function(userID)
+        {
+            var resumeList;
+            $.ajax({
+                type: "GET",
+                url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/getResumeList.php",
+                async: false,
+                data: {'userID': userID},
+                success: function(data){
+                    resumeList = jQuery.parseJSON(data);
+                }
+            });
+            return resumeList;
+
         },
 
         put: function(resume)
