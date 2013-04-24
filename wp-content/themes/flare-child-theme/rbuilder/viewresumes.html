@@ -6,7 +6,8 @@
   	<title>My Resumes</title>
   	<style>
   		[ng-cloak] {display: none}
-  		#resumeDiv {border: solid black 1px; padding: 5px;}
+  		#resumeDiv {border: solid black 1px; padding: 10px;}
+  		#list{padding: 20px;}
   	</style>
 
   	<!-- Uncomment for local dev -->
@@ -31,18 +32,16 @@
 <body>
 	<section id="rbuilderapp" style="height:842px;width:595px;margin-left:auto;margin-right:auto;border:1px solid black;" ng-controller="rbuilderCtrl" >
 	<h1>My Resumes</h1>
-	<input type="submit" ng-click="getResumeList(2)" value="Get Resumes">
 	<section id="list" ng-model="resumeList.resumes">
 		<div id="resumeDiv" ng-repeat="resumes in resumeList.resumes">
-			<label>Resume ID: {{resumes.resumeID}}</label> <br>
+			<label><b>Resume ID:</b> {{resumes.resumeID}}</label> <br>
+			<label><b>Resume Name:</b> {{resumes.resumeName}}</label> <br>
+			<label><b>Date Modified:</b> {{resumes.dateModified}}</label> <br>
 			<div id="resumeOptions">
 				<form action="/resume/">
 					<input type="submit" ng-click="addName()" value="View">
-				</form>
-				<form action="/rbuilder/">
 					<input type="submit" ng-click="getName()" value="Edit">
-				</form>
-				<input type="submit" ng-click="deleteResume($index)" value="Delete">
+				<input type="submit" ng-click="deleteResume($index)" value="Delete"></form>
 			</div>
 		</div>
 	</section>
