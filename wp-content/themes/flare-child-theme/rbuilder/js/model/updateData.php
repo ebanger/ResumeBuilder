@@ -1,4 +1,5 @@
 <?php
+	header('Access-Control-Allow-Origin: *');
 
     $stringData = $_POST['resume']; 
     $resumeID = $_POST['resumeID'];

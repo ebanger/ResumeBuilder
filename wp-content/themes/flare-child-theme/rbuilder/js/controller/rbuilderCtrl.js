@@ -4,17 +4,36 @@
 
 rbuildermvc.controller('rbuilderCtrl', function rbuilderCtrl($scope, rbuilderStorage) {
 	// do stuff
-	var resume = $scope.resume = rbuilderStorage.get();
+	var resumeList = [
+        {
+            "resumeID":"1",
+            "resumeName": "Project Manager"
+        },
+        {
+            "resumeID":"2",
+            "resumeName": "Senior Developer"
+        }
+    ];
 
+    $scope.resumeList = resumeList;
+	var resume = $scope.resume = null;
+	//var resumeList = $scope.resumeList = rbuilderStorage.getResumeList();
 
-	$scope.setName = function(){
-		resume.name = 'Jerry';
-		rbuilderStorage.put(resume);
+	$scope.deleteResume = function(resumeID){
+		resumeList.splice(resumeID, 1);
+		
 	}
 
-	$scope.selectResume = function(){}
+	$scope.saveResume = function(){
+		resume = $scope.resume;
+		console.log($scope.resume)
+		rbuilderStorage.update(resume, 3);
+	}
 
-	$scope.saveResume = function(){}
+	$scope.getResume = function(resumeID){
+	 	resume = rbuilderStorage.getResume(resumeID);
+	 	$scope.resume = resume;
+	}
 
 
 	/* Phien: list of functions */

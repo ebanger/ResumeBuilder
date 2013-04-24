@@ -2,4 +2,4 @@
 
 /* This is the main app module */
 
-var rbuildermvc = angular.module('rbuildermvc', []);
+var rbuildermvc = angular.module('rbuildermvc', ['ui.directives']);

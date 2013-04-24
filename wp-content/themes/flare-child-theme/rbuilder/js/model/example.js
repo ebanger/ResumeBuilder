@@ -2,6 +2,7 @@
                  name: 'John Doe',
                  userID: 1,
 +                resumeCount: 2,
+                 street: '123 Street St.',
 +                resumeList: [
                      {
 +                        resumeID:1,
@@ -17,7 +18,6 @@
 +                    { 
 +                        resumeID: 1,
 +                        jobPosition: 'Project Manager',
-+                        street: '123 Street St.',
 +                        education: [
 +                            {
 +                                educationID: '1', 

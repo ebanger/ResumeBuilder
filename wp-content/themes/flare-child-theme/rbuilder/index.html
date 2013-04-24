@@ -6,16 +6,21 @@
   	<title>Rbuilder MVC</title>
   	<style>
   		[ng-cloak] {display: none}
+  		#items{padding-top:2px;padding-left: 10px}
+  		#sectionTitle{padding-left:10px}
+  		#sectionBar{height:1px; width:90%; border-bottom: thin solid black}
   	</style>
 
   	<!-- Uncomment for local dev -->
 	<script src="js/libs/jquery/jquery-1.9.1.min.js"></script>
 	<script src="js/libs/jqueryui/ui/jquery-ui.js"></script>
 	<script src="js/libs/angular/angular.js"></script>
+	<script src="js/libs/angularui/build/angular-ui.js"></script>
 	<script src="js/app.js"></script>
 	<script src="js/controller/rbuilderCtrl.js"></script>
 	<script src="js/model/rbuilderModel.js"></script>
-	
+
+
 	<!-- Uncomment for web dev
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/libs/jquery/jquery-1.9.1.min.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/libs/jqueryui/ui/jquery-ui.js"></script>
@@ -24,53 +29,75 @@
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/controller/rbuilderCtrl.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/model/rbuilderModel.js"></script>
 	-->
-	
-	<script>
-  		$(function() {
-    	$( "#resumeBody" ).sortable();
-    	$( "#resumeBody" ).disableSelection();
-  		});
-  	</script>
 
 </head>
 
 <body>
+	<script>
+  		savePDF = function(){
+			$.ajax({
+                type: "GET",
+                url: "http://localhost/rbuilder/js/model/printResume.php",
+                async: false,
+                data: {'resumeHTML': 'hello'},
+                success : function(data){
+                	window.open("http://localhost/rbuilder/js/model/printResume.php");
+                }
+            });   
+  		};
+  	</script>
 	<section id="rbuilderapp" style="height:842px;width:595px;margin-left:auto;margin-right:auto;border:1px solid black;" ng-controller="rbuilderCtrl" >
-		<input type="submit" ng-click="setName()" value="change">
+		<input type="submit" ng-click="getResume(2)" value="Get Resume 2">
+		<input type="submit" ng-click="getResume(3)" value="Get Resume 3">
+		<input type="submit" ng-click="saveResume()" value="Save to DB">
+		<input type="button" value="Save PDF" onclick="savePDF()">
 		<header id="header" align="center">
 			<h1>{{resume.name}}</h1>
 		</header>
-
 		<section id="contact" align="center">
 			<label>{{resume.street}}</label>
 		</section>
-		<section id="resumeBody">
-		<section id="Education" style="margin-left:25px;margin-right:25px;border:1px solid black">
-			<h2>Education</h2>
 
-			<div ui:sortable ng-model="resume.currentResume.education" style="padding:0.5em">
-				<div ng-repeat="school in resume.currentResume.education" class="school">
-					{{school.schoolName}}
-					<li>GPA: {{school.gpa}}</li>
-				</div>
+		<section ui-sortable ng-model="resume.currentResume" update>
+			<div id="sectionTitle" ng-repeat="sections in resume.currentResume">
+				<h2>{{sections.section}}</h2>
+				<div id="sectionBar"></div>
+				<section ui-sortable ng-model="resume.currentResume[$index].items">
+					<div id="items" ng-repeat="item in resume.currentResume[$index].items">
+						{{item.schoolName}} 
+						{{item.companyName}}  {{item.beginDate}} 
+						<li id="items">
+							{{item.gpa}}
+							{{item.answerData}}
+							{{item.jobTitle}}
+						</li>
+					</div>
+				</section>
 			</div>
-		
-		</section>
-
-		<section id="Employment" style="margin-left:25px;margin-right:25px;border:1px solid black">
-			<h2>Employement</h2>
-			<div ng-model="resume.currentResume.employment" style="padding:0.5em">
-				<div ng-repeat="job in resume.currentResume.employment" class="job">
-					{{job.companyName}} 
-					<li>Title: {{job.jobTitle}}</li>
-					<li>Begin Date: {{job.beginDate}}</li>
-				</div>
-			</div>
-
-		
-		</section>
 		</section>
 	</section>
-
 </body>
 </html>
+		<!--
+		<section id="resumeBody">
+			<section id="Education" style="margin-left:25px;margin-right:25px;border:1px solid black">
+				<h2>Education</h2>
+				<div ui:sortable ng-model="resume.currentResume.education" style="padding:0.5em">
+					<div ng-repeat="school in resume.currentResume.education" class="school">
+						{{school.schoolName}}
+						<li>GPA: {{school.gpa}}</li>
+					</div>
+				</div>
+			</section>
+			<section id="Employment" style="margin-left:25px;margin-right:25px;border:1px solid black">
+				<h2>Employement</h2>
+				<div ng-model="resume.currentResume.employment" style="padding:0.5em">
+					<div ng-repeat="job in resume.currentResume.employment" class="job">
+					{{job.companyName}} 
+						<li>Title: {{job.jobTitle}}</li>
+						<li>Begin Date: {{job.beginDate}}</li>
+					</div>
+				</div>
+			</section>
+		</section>
+	-->
