@@ -1,10 +1,10 @@
 <?php
-	
+    header('Access-Control-Allow-Origin: *');
 	function getData()
 	{
-        $current_ID = $_GET['userID']; 
+        $current_ID = 2;// $_GET['userID']; 
         #$current_ID = '2';
-
+        
 		//$current_user = wp_get_current_user();
         #$current_user = 'sam@jackson.com';
 		$link = mysql_connect('localhost', 'themaro0_dev1', 'buildaresume!1');

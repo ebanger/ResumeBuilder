@@ -26,16 +26,15 @@
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/controller/rbuilderCtrl.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/model/rbuilderModel.js"></script>
 	-->
-
 </head>
 
 <body>
 	<section id="rbuilderapp" style="height:842px;width:595px;margin-left:auto;margin-right:auto;border:1px solid black;" ng-controller="rbuilderCtrl" >
 	<h1>My Resumes</h1>
-	<section id="resumesList" ng-model="resumeList">
-		<div id="resumeDiv" ng-repeat="resumes in resumeList" class="resumes">
+	<input type="submit" ng-click="getResumeList(2)" value="Get Resumes">
+	<section id="list" ng-model="resumeList.resumes">
+		<div id="resumeDiv" ng-repeat="resumes in resumeList.resumes">
 			<label>Resume ID: {{resumes.resumeID}}</label> <br>
-			<label>Resume Type: {{resumes.resumeName}}</label>
 			<div id="resumeOptions">
 				<form action="/resume/">
 					<input type="submit" ng-click="addName()" value="View">

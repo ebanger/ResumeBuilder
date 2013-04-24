@@ -11,6 +11,7 @@ rbuildermvc.factory('rbuilderStorage', function () {
             $.ajax({
                 type: "GET",
                 url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/getData.php",
+                
                 async: false,
 
                 success: function(data){

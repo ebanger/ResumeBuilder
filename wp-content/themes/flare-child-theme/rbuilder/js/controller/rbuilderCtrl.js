@@ -4,24 +4,12 @@
 
 rbuildermvc.controller('rbuilderCtrl', function rbuilderCtrl($scope, rbuilderStorage) {
 	// do stuff
-	var resumeList = [
-        {
-            "resumeID":"1",
-            "resumeName": "Project Manager"
-        },
-        {
-            "resumeID":"2",
-            "resumeName": "Senior Developer"
-        }
-    ];
-
-    $scope.resumeList = resumeList;
+	var resumeList = $scope.resumeList = null;
 	var resume = $scope.resume = null;
-	//var resumeList = $scope.resumeList = rbuilderStorage.getResumeList();
 
-	$scope.deleteResume = function(resumeID){
-		resumeList.splice(resumeID, 1);
-		
+	$scope.getResumeList = function(userID){
+		resumeList = rbuilderStorage.getResumeList(userID);
+		$scope.resumeList = resumeList;
 	}
 
 	$scope.saveResume = function(){
