@@ -84,6 +84,16 @@ rbuildermvc.factory('rbuilderStorage', function () {
                 data: { 'resume': resume, 'resumeID': resumeID },
                 async: false
             });
+        },
+
+        deleteResume: function(resumeID)
+        {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/deleteResume.php",
+                data: { 'resumeID': resumeID },
+                async: false
+            });
         }
      
     };
