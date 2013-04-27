@@ -27,6 +27,13 @@
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/controller/rbuilderCtrl.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/model/rbuilderModel.js"></script>
 	-->
+
+	<script>
+	loadResume = function(){
+
+		
+	}
+	</script>
 </head>
 
 <body>
@@ -38,10 +45,9 @@
 			<label><b>Resume Name:</b> {{resumes.resumeName}}</label> <br>
 			<label><b>Date Modified:</b> {{resumes.dateModified}}</label> <br>
 			<div id="resumeOptions">
-				<form action="/resume/">
-					<input type="submit" ng-click="addName()" value="View">
-					<input type="submit" ng-click="getName()" value="Edit">
-				<input type="submit" ng-click="deleteResume($index)" value="Delete"></form>
+				<input type="submit" ng-click="getResume($index)" value="View">
+				<input type="submit" ng-click="getName()" value="Edit">
+				<input type="submit" ng-click="deleteResume($index)" value="Delete">
 			</div>
 		</div>
 	</section>

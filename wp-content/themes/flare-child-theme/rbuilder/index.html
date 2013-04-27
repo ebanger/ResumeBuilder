@@ -33,7 +33,7 @@
 
 </head>
 
-<body>
+<body ng-controller="rbuilderCtrl">
 	<script>
   		savePDF = function(){
 			$.ajax({
@@ -46,8 +46,22 @@
                 }
             });   
   		};
+  		goToResumes = function(){
+  			if(confirm("Are you sure you want to leave this resume? Did you save your changes?")){
+  				window.location.href = "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/viewresumes.html";
+  			}
+  		}
   	</script>
-	<section id="rbuilderapp" style="height:842px;width:595px;margin-left:auto;margin-right:auto;border:1px solid black;" ng-controller="rbuilderCtrl" >
+  	<section style="align:center;padding:10px">
+  		<input type="submit" ng-click="getResume(1)" value="Load Resume 1">
+  		<input type="submit" ng-click="getResume(2)" value="Load Resume 2">
+  		<input type="submit" ng-click="getResume(3)" value="Load Resume 3">
+  		<input type="submit" ng-click="getResume(4)" value="Load Resume 4">
+  		<input type="submit" ng-click="saveResume()" value="Save Resume">
+  		<input type="submit" onclick="goToResumes()" value="Go back">
+  	</section>
+
+	<section id="rbuilderapp" style="height:842px;width:595px;margin-left:auto;margin-right:auto;border:1px solid black;" >
 		<h2 align="center">{{resume.name}}</h2>
 
 		<section id="contact" align="center">
