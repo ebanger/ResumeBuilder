@@ -6,60 +6,112 @@
   	<title>Rbuilder MVC</title>
   	<style>
   		[ng-cloak] {display: none}
+  		#items{padding-top:2px;padding-left: 10px}
+  		#sectionTitle{padding-left:10px}
+  		#sectionBar{height:1px; width:95%; border-bottom: thin solid black}
   	</style>
 
-  	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-
-	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/libs/angular.js"></script>
+  	<!-- Uncomment for local dev -
+	<script src="js/libs/jquery/jquery-1.9.1.min.js"></script>
+	<script src="js/libs/jqueryui/ui/jquery-ui.js"></script>
+	<script src="js/libs/angular/angular.min.js"></script>
+	<script src="js/libs/angularui/build/angular-ui.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controller/rbuilderCtrl.js"></script>
+	<script src="js/model/rbuilderModel.js"></script>
+	-->
+		
+	<!-- Uncomment for web dev -->
+	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/libs/jquery/jquery-1.9.1.min.js"></script>
+	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/libs/jqueryui/ui/jquery-ui.js"></script>
+	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/libs/angular/angular.min.js"></script>
+	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/libs/angularui/build/angular-ui.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/app.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/controller/rbuilderCtrl.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/model/rbuilderModel.js"></script>
-		
-	<script>
-  		$(function() {
-    	$( "#rbuilderapp" ).sortable();
-    	$( "#rbuilderapp" ).disableSelection();
-  		});
-  	</script>
+	
 
 </head>
 
-<body>
-	<section id="rbuilderapp" style="height:842px;width:595px;margin-left:auto;margin-right:auto;border:1px solid black;" ng-controller="rbuilderCtrl" >
-		<header id="header" align="center">
-			<h1>{{resume.name}}</h1>
-		</header>
+<body ng-controller="rbuilderCtrl">
+	<script>
+  		savePDF = function(){
+			$.ajax({
+                type: "GET",
+                url: "http://localhost/rbuilder/js/model/printResume.php",
+                async: false,
+                data: {'resumeHTML': 'hello'},
+                success : function(data){
+                	window.open("http://localhost/rbuilder/js/model/printResume.php");
+                }
+            });   
+  		};
+  		goToResumes = function(){
+  			if(confirm("Are you sure you want to leave this resume? Did you save your changes?")){
+  				window.location.href = "http://dev1.arrowresumebuilder.com/resume/";
+  			}
+  		}
+  	</script>
+  	<section style="align:center;padding:10px">
+  		<input type="submit" ng-click="getResume(1)" value="Load Resume 1">
+  		<input type="submit" ng-click="getResume(2)" value="Load Resume 2">
+  		<input type="submit" ng-click="getResume(3)" value="Load Resume 3">
+  		<input type="submit" ng-click="getResume(4)" value="Load Resume 4">
+  		<input type="submit" ng-click="saveResume()" value="Save Resume">
+  		<input type="submit" onclick="goToResumes()" value="Go back">
+  	</section>
+
+	<section id="rbuilderapp" style="height:842px;width:595px;margin-left:auto;margin-right:auto;border:1px solid black;" >
+		<h2 align="center">{{resume.name}}</h2>
 
 		<section id="contact" align="center">
-			<label>{{resume.street}}</label>
+			<label>{{resume.email}}</label><br>
+			<label>{{resume.phone}}</label><br>
+			<label>{{resume.street}}</label><br>
+			<label>{{resume.city}}</label>
+
 		</section>
 
-		<section id="Education" style="margin-left:25px;margin-right:25px;border:1px solid black">
-			<h2>Education</h2>
-
-			<ul ui:sortable ng-model="resume.education">
-				<li ng-repeat="school in resume.education" class="school">
-					{{school.schoolName}}
-					GPA: {{school.gpa}}
-				</li>
-			</ul>
-		
-		</section>
-
-		<section id="Employment" style="margin-left:25px;margin-right:25px;border:1px solid black">
-			<h2>Employement</h2>
-			<div ng-model="resume.employment">
-				<div ng-repeat="job in resume.employment" class="job">
-					{{job.companyName}} 
-					<li>Title: {{job.jobTitle}}</li>
-					<li>Begin Date: {{job.beginDate}}</li>
-				</div>
+		<section ui-sortable ng-model="resume.currentResume">
+			<div id="sectionTitle" ng-repeat="sections in resume.currentResume">
+				<h2>{{sections.section}}</h2>
+				<div id="sectionBar"></div>
+				<section ui-sortable ng-model="resume.currentResume[$index].items">
+					<div id="items" ng-repeat="item in resume.currentResume[$index].items">
+						<b>{{item.schoolName}}</b> {{item.dateGrad}}
+						<b>{{item.companyName}}</b> {{item.beginDate}} <i>{{item.endDate}}</i>
+						<li id="items">
+							{{item.gpa}}
+							{{item.answerData}}
+							{{item.jobTitle}}
+						</li>
+					</div>
+				</section>
 			</div>
-
-		
 		</section>
 	</section>
-
 </body>
 </html>
+		<!--
+		<section id="resumeBody">
+			<section id="Education" style="margin-left:25px;margin-right:25px;border:1px solid black">
+				<h2>Education</h2>
+				<div ui:sortable ng-model="resume.currentResume.education" style="padding:0.5em">
+					<div ng-repeat="school in resume.currentResume.education" class="school">
+						{{school.schoolName}}
+						<li>GPA: {{school.gpa}}</li>
+					</div>
+				</div>
+			</section>
+			<section id="Employment" style="margin-left:25px;margin-right:25px;border:1px solid black">
+				<h2>Employement</h2>
+				<div ng-model="resume.currentResume.employment" style="padding:0.5em">
+					<div ng-repeat="job in resume.currentResume.employment" class="job">
+					{{job.companyName}} 
+						<li>Title: {{job.jobTitle}}</li>
+						<li>Begin Date: {{job.beginDate}}</li>
+					</div>
+				</div>
+			</section>
+		</section>
+	-->

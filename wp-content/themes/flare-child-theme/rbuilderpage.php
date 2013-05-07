@@ -4,5 +4,4 @@
  *
  */
 ?>
-	<?php include ('rbuilder/index.html'); ?>
-<?php get_footer(); ?>
+<?php include ('rbuilder/index.html'); ?>
