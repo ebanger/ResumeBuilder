@@ -10,26 +10,14 @@ rbuildermvc.factory('rbuilderStorage', function () {
 
             $.ajax({
                 type: "GET",
-                url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/getData.php",
-                
+                //url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/getData.php",
+                url: "http://dev1.arrowresumebuilder.com/wp-content/themes/flare-child-theme/rbuilder/js/model/getData.php",
                 async: false,
 
                 success: function(data){
                     resume = jQuery.parseJSON(data);
-
                 }
-            });        
-            
-            /*
-            $.ajax({
-                type: "POST",
-                url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/putData.php",
-                data: { 'resume': resume},
-                async: false
-
-            });
-            */
-
+            });       
             return resume;
         },
 
@@ -38,7 +26,8 @@ rbuildermvc.factory('rbuilderStorage', function () {
             var resume;
             $.ajax({
                 type: "GET",
-                url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/getResume.php",
+                //url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/getResume.php",
+                url: "http://dev1.arrowresumebuilder.com/wp-content/themes/flare-child-theme/rbuilder/js/model/getResume.php",
                 async: false,
                 data: { 'resumeID': resumeID },
                 success: function(data){
@@ -49,14 +38,15 @@ rbuildermvc.factory('rbuilderStorage', function () {
             return resume;
         },
 
-        getResumeList: function(userID)
+        getResumeList: function()
         {
             var resumeList;
             $.ajax({
                 type: "GET",
-                url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/getResumeList.php",
+                //url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/getResumeList.php",
+                url: "http://dev1.arrowresumebuilder.com/wp-content/themes/flare-child-theme/rbuilder/js/model/getResumeList.php",
                 async: false,
-                data: {'userID': userID},
+                //data: {'userID': userID},
                 success: function(data){
                     resumeList = jQuery.parseJSON(data);
                 }
@@ -69,7 +59,8 @@ rbuildermvc.factory('rbuilderStorage', function () {
         {
             $.ajax({
                 type: "POST",
-                url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/putData.php",
+                //url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/putData.php",
+                url: "http://dev1.arrowresumebuilder.com/wp-content/themes/flare-child-theme/rbuilder/js/model/putData.php",
                 data: { 'resume': resume},
                 async: false
 
@@ -80,7 +71,8 @@ rbuildermvc.factory('rbuilderStorage', function () {
         {
             $. ajax({
                 type: "POST",
-                url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/updateData.php",
+                //url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/updateData.php",
+                url: "http://dev1.arrowresumebuilder.com/wp-content/themes/flare-child-theme/rbuilder/js/model/updateData.php",
                 data: { 'resume': resume, 'resumeID': resumeID },
                 async: false
             });
@@ -90,7 +82,8 @@ rbuildermvc.factory('rbuilderStorage', function () {
         {
             $.ajax({
                 type: "POST",
-                url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/deleteResume.php",
+                //url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/deleteResume.php",
+                url: "http://dev1.arrowresumebuilder.com/wp-content/themes/flare-child-theme/rbuilder/js/model/deleteResume.php",
                 data: { 'resumeID': resumeID },
                 async: false
             });

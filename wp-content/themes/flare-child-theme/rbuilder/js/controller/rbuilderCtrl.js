@@ -5,10 +5,12 @@
 rbuildermvc.controller('rbuilderCtrl', function rbuilderCtrl($scope, rbuilderStorage) {
 	// do stuff
 	//var resumeList = $scope.resumeList = {"resumes":[{"resumeID":"1","resumeName":"Java Developer","dateModified":"2013-23-4"},{"resumeID":"2","resumeName":"Pizza Maker","dateModified":"2010-22-6"},{"resumeID":"3","resumeName":"Astronaut","dateModified":"2011-14-1"},{"resumeID":"4","resumeName":"Linux Administrator","dateModified":"2013-01-12"}]};
-	var resumeList = $scope.resumeList = rbuilderStorage.getResumeList(2);
-	var resume = $scope.resume;
-	var currentUser;
+	
 	var currentResumeId;
+	var resumeList = $scope.resumeList = rbuilderStorage.getResumeList();
+	var resume = $scope.resume = getResume(currentResumeId);
+	//var currentUser;
+	
 
 	$scope.getResumeList = function(userID){
 		resumeList = rbuilderStorage.getResumeList(userID);
@@ -35,7 +37,7 @@ rbuildermvc.controller('rbuilderCtrl', function rbuilderCtrl($scope, rbuilderSto
 		if(confirm("Are you sure you want to delete this resume?")){
 			var resumeToDelete = parseInt(index, 10);
 			rbuilderStorage.deleteResume(parseInt(resumeList.resumes[resumeToDelete].resumeID, 10));
-			resumeList = $scope.resumeList = rbuilderStorage.getResumeList(2);
+			resumeList = $scope.resumeList = rbuilderStorage.getResumeList();
 		}
 	}
 
