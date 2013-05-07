@@ -1,28 +1,14 @@
 <?php
 
-
-
 /*
-
-
 
  * Template Name: Edit Employment
 
-
-
  *
-
-
 
  */
 
-
-
 ?>
-
-
-
-
 
 
 
@@ -30,15 +16,7 @@
 
 
 
-
-
-
-
-  <?php  the_post(); ?>
-
-
-
-
+	<?php  the_post(); ?> 
 
 
 
@@ -46,15 +24,7 @@
 
 
 
-
-
-
-
 <div id="content">
-
-
-
-
 
 
 
@@ -62,19 +32,9 @@
 
 
 
-
-
-
-
 			<div class="grid">
 
-
-
 				<article id="post-<?php the_ID(); ?>" <?php post_class( 'c-three-fourth' ); ?>>									
-
-
-
-
 
 
 
@@ -82,15 +42,7 @@
 
 
 
-
-
-
-
-						<?php include ('custompages/employment.php'); ?>
-
-
-
-
+						<?php include('custompages/employment.php'); ?>
 
 
 
@@ -98,23 +50,11 @@
 
 
 
-
-
-
-
 					</div><!-- .entry-content -->
-
-
 
 					
 
-
-
 					<div class="entry-utility">		
-
-
-
-
 
 
 
@@ -122,25 +62,11 @@
 
 
 
-
-
-
-
 					</div><!-- .entry-utility -->
-
-
 
 	
 
-
-
 				</article> 
-
-
-
-
-
-
 
 
 
@@ -150,15 +76,7 @@
 
 
 
-
-
-
-
 					<div class="helper"></div>
-
-
-
-
 
 
 
@@ -166,15 +84,7 @@
 
 
 
-
-
-
-
 						<?php get_template_part( 'page_nav' ); ?>
-
-
-
-
 
 
 
@@ -182,15 +92,7 @@
 
 
 
-
-
-
-
 					<div class="helper"></div>
-
-
-
-
 
 
 
@@ -198,15 +100,7 @@
 
 
 
-
-
-
-
 			</div>		
-
-
-
-
 
 
 
@@ -214,41 +108,12 @@
 
 
 
-
-
-
-
 		<div class="background"><div></div></div>
-
-
-
-
 
 
 
 	</div><!-- #content -->
 
-
-
-$link = mysql_connect('localhost', 'themaro0_dev1', 'buildaresume!1');
-if (!link) {
-die('Could not connect: ' . mysql_error());
-}
-
-$db_selected = mysql_select_db('themaro0_dev1', $link);
-if (!db_selected){
-die('Cant use DB: ' . mysql_error());
-}
-
-$result = json_decode($o);
-foreach($result as $key => $value) {
-    if($value) {
-
-            //how to use json array to insert data in Database
-        mysql_query("INSERT INTO tablename (company, Title, city, State, country) VALUES ($value->company, $value->Title,$value->city, $value->State, $value->country)");
-    }
-    mysql_close($link);
-
-
+	
 
 <?php get_footer(); ?>

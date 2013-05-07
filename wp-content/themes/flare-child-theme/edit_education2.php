@@ -28,7 +28,7 @@
 
 					<div class="entry-content">	
 
-						<?php include ('custompages/education.html'); ?>
+						<?php include ('custompages/edu.php'); ?>
 
 						<?php btp_wp_link_pages(); ?>
 

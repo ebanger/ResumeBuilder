@@ -20,7 +20,7 @@
 
 					<div class="entry-content">	
 
-						<?php include ('custompages/editcontact.html'); ?>
+						<?php include ('custompages/contact.php'); ?>
 
 						<?php btp_wp_link_pages(); ?>
 

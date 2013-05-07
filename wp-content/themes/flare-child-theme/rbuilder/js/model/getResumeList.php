@@ -2,7 +2,7 @@
     header('Access-Control-Allow-Origin: *');
 	function getData()
 	{
-		//$current_user = wp_get_current_user();
+		$current_user = wp_get_current_user();
         
 
 		$link = mysql_connect('localhost', 'themaro0_dev1', 'buildaresume!1');
@@ -17,10 +17,10 @@
 			die('Cant use DB: ' . mysql_error());
 		}
 
-        //$query = sprintf("SELECT userID from users where email='" . $current_user ."'");
-       // $result = mysql_query($query);
+        $query = sprintf("SELECT userID from users where email='" . $current_user->user_login ."'");
+        $result = mysql_query($query);
 
-        $current_ID = 2;//mysql_result($result, 0);
+        $current_ID = mysql_result($result, 0);
 
         //Acquire Resume List
 		$query = sprintf("SELECT resumeID from resume WHERE userID='" . $current_ID . "'");

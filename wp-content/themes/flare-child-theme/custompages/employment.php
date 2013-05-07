@@ -10,7 +10,7 @@
 
 
 
-if($_POST){
+$current_user = wp_get_current_user();
 
 
 
@@ -20,55 +20,63 @@ $link = mysql_connect('localhost', 'themaro0_dev1', 'buildaresume!1');
 
 if (!link) {
 
-
-
-die('Could not connect: ' . mysql_error());
-
-
+	die('Could not connect: ' . mysql_error());
 
 }
-
-
-
- 
 
 
 
 $db_selected = mysql_select_db('themaro0_dev1', $link);
 
 
-
-
-
-
-
 if (!db_selected){
 
-
-
-die('Cant use DB: ' . mysql_error());
-
-
+	die('Cant use DB: ' . mysql_error());
 
 }
 
+$query = sprintf("SELECT userID from users where email='" . $current_user->user_login ."'");
+
+$result = mysql_query($query);
+
+$current_ID = mysql_result($result, 0);
+
+$query = sprintf("SELECT companyName, jobTitle, city, state, beginDate, endDate, achievements, reason  from employment WHERE userID='" . $current_ID . "'");
+
+$result = mysql_query($query);
+
+
+
+while($row = mysql_fetch_assoc($result)){
+
+		$company = $row['companyName'];
+
+		$title =    $row['jobTitle'];
+
+		$city = $row['city'];
+
+		$state = $row['state'];
+
+		$beginDate 	= $row['beginDate'];
+
+		$endDate	= $row['endDate'];
+
+		$achievements = $row['achievements'];
+
+		$reason = $row['reason'];
+	}
 
 
 
 
 
+if($_POST){
 
 $company = $_POST['company'];
 
-
-
 $title = $_POST['title'];
 
-
-
 $city = $_POST['city'];
-
-
 
 $state = $_POST['state'];
 
@@ -78,30 +86,25 @@ $endDate = $_POST['endDate'];
 
 $achievements = $_POST['achievements']; 
 
+$reason = $_POST['reason'];
 
-$reasonForLeaving = $_POST['reasonForLeaving'];
+$query = sprintf("SELECT * from employment where userID='" . $current_ID ."'");
 
+$result = mysql_query($query);
 
+$num = mysql_num_rows($result);
 
-$query = "INSERT INTO employment(companyName, jobTitle, beginDate, endDate, achievements)VALUES('$company', '$title', '$beginDate', '$endDate','$achievements')";
-
-
-
-
-
-
+if($num > 0){
+	$query = "UPDATE employment SET companyName = '$company', jobTitle = '$title', city = '$city', state = '$state', beginDate = '$beginDate', endDate = '$endDate', achievements = '$achievements', reason = '$reason' WHERE userID = '$current_ID'";
+} elseif($num == 0) {
+	$query = "INSERT INTO employment(userID, companyName, jobTitle, city, state, beginDate, endDate, achievements, reason)VALUES('$current_ID', '$company', '$title', '$city', '$state', '$beginDate', '$endDate','$achievements', '$reason')";
+}
 
 mysql_query ($query);
 
-
-
 mysql_close($link);
 
-
-
 }
-
-
 
 ?>
 
@@ -113,7 +116,7 @@ mysql_close($link);
 
 <p><strong>Company: </strong><br/>
 
-<input type="text" name ="company" maxlength="75" size="75" /> </br>
+<input type="text" name ="company" maxlength="75" size="75" value=<?php echo $company?> /> </br>
 
 </p>
 
@@ -121,7 +124,7 @@ mysql_close($link);
 
 <p><strong>Title:</strong><br/>
 
-<input type="text" name="title" maxlength="30" size="30" /> </br>
+<input type="text" name="title" maxlength="30" size="30" value=<?php echo $title?> /> </br>
 
 </p>
 
@@ -129,145 +132,36 @@ mysql_close($link);
 
 <p><strong>City:</strong><br/>
 
-<input type="text" name="city" maxlength="20" size="20" /> </br>
+<input type="text" name="city" maxlength="20" size="20" value = <?php echo $city?> /> </br>
 
 </p>
 
+<p><strong>State:</strong><br/>
 
+<input type="text" name="state" maxlength="20" size="20" value = <?php echo $state?> /> </br>
 
+</p>
 
-
-
-
-<strong> State: </strong></br>
-
-<select name="State" style="width:150px;>
-
-<option value="" selected="selected">Select a State</option>
-
-<option value="AL">Alabama</option>
-
-<option value="AK">Alaska</option>
-
-<option value="AZ">Arizona</option>
-
-<option value="AR">Arkansas</option>
-
-<option value="CA">California</option>
-
-<option value="CO">Colorado</option>
-
-<option value="CT">Connecticut</option>
-
-<option value="DE">Delaware</option>
-
-<option value="DC">District Of Columbia</option>
-
-<option value="FL">Florida</option>
-
-<option value="GA">Georgia</option>
-
-<option value="HI">Hawaii</option>
-
-<option value="ID">Idaho</option>
-
-<option value="IL">Illinois</option>
-
-<option value="IN">Indiana</option>
-
-<option value="IA">Iowa</option>
-
-<option value="KS">Kansas</option>
-
-<option value="KY">Kentucky</option>
-
-<option value="LA">Louisiana</option>
-
-<option value="ME">Maine</option>
-
-<option value="MD">Maryland</option>
-
-<option value="MA">Massachusetts</option>
-
-<option value="MI">Michigan</option>
-
-<option value="MN">Minnesota</option>
-
-<option value="MS">Mississippi</option>
-
-<option value="MO">Missouri</option>
-
-<option value="MT">Montana</option>
-
-<option value="NE">Nebraska</option>
-
-<option value="NV">Nevada</option>
-
-<option value="NH">New Hampshire</option>
-
-<option value="NJ">New Jersey</option>
-
-<option value="NM">New Mexico</option>
-
-<option value="NY">New York</option>
-
-<option value="NC">North Carolina</option>
-
-<option value="ND">North Dakota</option>
-
-<option value="OH">Ohio</option>
-
-<option value="OK">Oklahoma</option>
-
-<option value="OR">Oregon</option>
-
-<option value="PA">Pennsylvania</option>
-
-<option value="RI">Rhode Island</option>
-
-<option value="SC">South Carolina</option>
-
-<option value="SD">South Dakota</option>
-
-<option value="TN">Tennessee</option>
-
-<option value="TX">Texas</option>
-
-<option value="UT">Utah</option>
-
-<option value="VT">Vermont</option>
-
-<option value="VA">Virginia</option>
-
-<option value="WA">Washington</option>
-
-<option value="WV">West Virginia</option>
-
-<option value="WI">Wisconsin</option>
-
-<option value="WY">Wyoming</option>
-
-</select> <br/>
 
 
 <br/>
 
 <p><strong>Begin Date: </strong><br/>
 
-<input type="text" name ="beginDate" value="YYYY-MM-DD" maxlength="30" style="width:150px" /> </br>
+<input type="text" name ="beginDate" value=<?php echo $beginDate?> maxlength="30" style="width:150px" /> </br>
 
 </p>
 
 <p><strong>End Date: </strong><br/>
 
-<input type="text" name ="endDate" value="YYYY-MM-DD" maxlength="30" style="width:150px" /> </br>
+<input type="text" name ="endDate" value=<?php echo $endDate?> maxlength="30" style="width:150px" /> </br>
 
 </p>
 
 
 <p><strong>Achievements: </strong><br/>
 
-<input type="text" name ="achievements" maxlength="100" style="width: 500px; height:100px; " /> </br>
+<input type="text" name ="achievements" value=<?php echo $achievements?> maxlength="100" style="width: 500px; height:100px; " /> </br>
 
 </p>
 
@@ -275,7 +169,7 @@ mysql_close($link);
 
 <p><strong>Reason for Leaving: </strong><br/>
 
-<input type="text" name ="reasonforleaving" maxlength="100" size="100" /> </br>
+<input type="text" name ="reason" maxlength="100" size="100" value=<?php echo $reason?> /> </br>
 
 </p>
 

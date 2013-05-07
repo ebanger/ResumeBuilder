@@ -1,29 +1,55 @@
 <html>
 <body>
 <?php
-if($_POST){
+$current_user = wp_get_current_user();
+
 $link = mysql_connect('localhost', 'themaro0_dev1', 'buildaresume!1');
+
 if (!link) {
-die('Could not connect: ' . mysql_error());
+    die('Could not connect: ' . mysql_error());
 }
- 
+
 $db_selected = mysql_select_db('themaro0_dev1', $link);
 
 if (!db_selected){
-die('Cant use DB: ' . mysql_error());
+    die('Cant use DB: ' . mysql_error());
 }
 
-$school = $_POST['school'];
-$city = $_POST['city'];
-$state = $_POST['state'];
-$country = $_POST['Country'];
-$degree = $_POST['Dname'];
-$major = $_POST['major'];
-$Gyear = $_POST['Gyear'];
-$Gpa = $_POST['Gpa'];
-$honors = $_POST['honors'];
+$query = sprintf("SELECT userID from users where email='" . $current_user->user_login ."'");
+$result = mysql_query($query);
+$current_ID = mysql_result($result, 0);
 
-$query = "INSERT INTO education(schoolName,gradyear, degreeType, degree, gpa, honors)VALUES('$school','$Gyear','$degree','$major','$Gpa','$honors')";
+$query = sprintf("SELECT schoolName, gradyear, degreeType, degree, gpa, honors, city, state FROM education WHERE userID='" . $current_ID . "'");
+$result = mysql_query($query);
+
+while($row = mysql_fetch_assoc($result)){
+    $schoolName = $row['schoolName'];
+    $gradyear = $row['gradyear'];
+    $degreeType = $row['degreeType'];
+    $degree = $row['degree'];
+    $gpa = $row['gpa'];
+    $honors = $row['honors'];
+    $city = $row['city'];
+    $state = $row['state'];
+    }
+
+
+if($_POST){
+
+    $schoolName = $_POST['schoolName'];
+    $gradyear = $_POST['gradyear'];
+    $degreeType = $_POST['degreeType'];
+    $degree = $_POST['degree'];
+    $gpa = $_POST['gpa'];
+    $honors = $_POST['honors'];
+    $city = $_POST['city'];
+    $state = $_POST['state'];
+
+if($num > 0){
+    $query = "UPDATE education SET schoolName = '$schoolName', gradyear = '$gradyear', degreeType = '$degreeType', degree = '$degree', gpa = '$gpa', honors = '$honors', city = '$city', state = '$state' WHERE userID = '$current_ID'";
+} elseif($num == 0) {
+    $query = "INSERT INTO education(userID, schoolName, gradyear, degreeType, degree, gpa, honors, city, state)VALUES('$current_ID', '$schoolName', '$gradyear', '$degreeType', '$degree', '$gpa', '$honors','$city', '$state')";
+}
 
 mysql_query ($query);
 mysql_close($link);
@@ -31,134 +57,14 @@ mysql_close($link);
 ?>
 
 <form method="post" action="<?php $_PHP_SELF ?>">
-<p><strong> School: </strong> <br/> <input type="text" name="school" maxlength="30" size="30"/> <br/> <br/> </p>
-<p><strong> City: </strong><br/>  <input type="text" name="city" maxlength="20" size="20"/> <br/>  <br/> </p>
-<strong> State: </strong></br>
-
-<select name="State" style="width:150px;>
-
-<option value="" selected="selected">Select a State</option>
-
-<option value="AL">Alabama</option>
-
-<option value="AK">Alaska</option>
-
-<option value="AZ">Arizona</option>
-
-<option value="AR">Arkansas</option>
-
-<option value="CA">California</option>
-
-<option value="CO">Colorado</option>
-
-<option value="CT">Connecticut</option>
-
-<option value="DE">Delaware</option>
-
-<option value="DC">District Of Columbia</option>
-
-<option value="FL">Florida</option>
-
-<option value="GA">Georgia</option>
-
-<option value="HI">Hawaii</option>
-
-<option value="ID">Idaho</option>
-
-<option value="IL">Illinois</option>
-
-<option value="IN">Indiana</option>
-
-<option value="IA">Iowa</option>
-
-<option value="KS">Kansas</option>
-
-<option value="KY">Kentucky</option>
-
-<option value="LA">Louisiana</option>
-
-<option value="ME">Maine</option>
-
-<option value="MD">Maryland</option>
-
-<option value="MA">Massachusetts</option>
-
-<option value="MI">Michigan</option>
-
-<option value="MN">Minnesota</option>
-
-<option value="MS">Mississippi</option>
-
-<option value="MO">Missouri</option>
-
-<option value="MT">Montana</option>
-
-<option value="NE">Nebraska</option>
-
-<option value="NV">Nevada</option>
-
-<option value="NH">New Hampshire</option>
-
-<option value="NJ">New Jersey</option>
-
-<option value="NM">New Mexico</option>
-
-<option value="NY">New York</option>
-
-<option value="NC">North Carolina</option>
-
-<option value="ND">North Dakota</option>
-
-<option value="OH">Ohio</option>
-
-<option value="OK">Oklahoma</option>
-
-<option value="OR">Oregon</option>
-
-<option value="PA">Pennsylvania</option>
-
-<option value="RI">Rhode Island</option>
-
-<option value="SC">South Carolina</option>
-
-<option value="SD">South Dakota</option>
-
-<option value="TN">Tennessee</option>
-
-<option value="TX">Texas</option>
-
-<option value="UT">Utah</option>
-
-<option value="VT">Vermont</option>
-
-<option value="VA">Virginia</option>
-
-<option value="WA">Washington</option>
-
-<option value="WV">West Virginia</option>
-
-<option value="WI">Wisconsin</option>
-
-<option value="WY">Wyoming</option>
-
-</select> <br/>
-
-
-<br/>
-
-
-    
-<strong> Degree:</strong> <br/> 
-<select name="Dname" id = "Dname">
- <option value = "Bachelors"> Bachelors</option>
-<option value = "Masters"> Masters</option>
-<option value = "Ph.D."> Ph.D.</option>
-<option value = "Professional Doctoral Degree"> Professional Doctoral Degree</option>
-  </select> <br/> <br/>
-<p><strong> Major: </strong> </br>  <input type="text" name="major" maxlength="20" size="20"/> <br/> <br/> </p>
-<p><strong> Graduated Year: </strong> </br>  <input type="text" name="Gyear" maxlength="20" size="20"/> <br/> <br/> </p>
-<p><strong> GPA: </strong> </br>  <input type="text" name="Gpa" maxlength="4" size="4"/> <br/> <br/> </p>
-<p><strong> Honors: </strong> </br>  <input type="text" name="honors" maxlength="20" size="20"/> <br/> <br/> </p>
+<p><strong> School: </strong> <br/> <input type="text" name="schoolName" maxlength="30" size="30" value=<?php echo $schoolName ?> /> <br/> <br/> </p>
+<p><strong> City: </strong><br/>  <input type="text"name="city"  maxlength="20" size="20" value=<?php echo "'" . $city . "'" ?> /> <br/>  <br/> </p>
+<p><strong> State: </strong> <br/> <input type="text" name="state"  maxlength="30" size="30" value=<?php echo $state ?> /> <br/> <br/> </p>
+<p><strong> Degree: </strong> <br/> <input type="text" name="degreeType" maxlength="30" size="30" value=<?php echo $degreeType?> /> <br/> <br/> </p>
+<p><strong> Major: </strong> </br>  <input type="text" name="degree" maxlength="20" size="20" value=<?php echo $degree?> /> <br/> <br/> </p>
+<p><strong> Graduated Year: </strong> </br>  <input type="text" name="gradyear" maxlength="20" size="20" value=<?php echo $gradyear ?> /> <br/> <br/> </p>
+<p><strong> GPA: </strong> </br>  <input type="text" name="gpa" maxlength="4" size="4" value=<?php echo $gpa ?> /> <br/> <br/> </p>
+<p><strong> Honors: </strong> </br>  <input type="text" name="honors" maxlength="20" size="20" value=<?php echo "'" . $honors . "'" ?> /> <br/> <br/> </p>
 <p><input type="submit" name = "Submit" value = "Submit" /></p>    <br/> <br/>
 
 </form>
