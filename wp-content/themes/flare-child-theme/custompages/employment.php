@@ -116,7 +116,7 @@ mysql_close($link);
 
 <p><strong>Company: </strong><br/>
 
-<input type="text" name ="company" maxlength="75" size="75" value=<?php echo $company?> /> </br>
+<input type="text" name ="company" maxlength="75" size="75" value=<?php echo "'" . $company . "'" ?> /> </br>
 
 </p>
 
@@ -124,7 +124,7 @@ mysql_close($link);
 
 <p><strong>Title:</strong><br/>
 
-<input type="text" name="title" maxlength="30" size="30" value=<?php echo $title?> /> </br>
+<input type="text" name="title" maxlength="30" size="30" value=<?php echo "'" . $title . "'" ?> /> </br>
 
 </p>
 
@@ -132,13 +132,13 @@ mysql_close($link);
 
 <p><strong>City:</strong><br/>
 
-<input type="text" name="city" maxlength="20" size="20" value = <?php echo $city?> /> </br>
+<input type="text" name="city" maxlength="20" size="20" value = <?php echo "'" . $city . "'"?> /> </br>
 
 </p>
 
 <p><strong>State:</strong><br/>
 
-<input type="text" name="state" maxlength="20" size="20" value = <?php echo $state?> /> </br>
+<input type="text" name="state" maxlength="20" size="20" value = <?php echo "'" . $state . "'" ?> /> </br>
 
 </p>
 
@@ -146,22 +146,22 @@ mysql_close($link);
 
 <br/>
 
-<p><strong>Begin Date: </strong><br/>
+<p><strong>Begin Date (YYYY-MM-DD): </strong><br/>
 
-<input type="text" name ="beginDate" value=<?php echo $beginDate?> maxlength="30" style="width:150px" /> </br>
+<input type="text" name ="beginDate" value=<?php echo "'" . $beginDate . "'" ?> maxlength="30" style="width:150px" /> </br>
 
 </p>
 
-<p><strong>End Date: </strong><br/>
+<p><strong>End Date (YYYY-MM-DD): </strong><br/>
 
-<input type="text" name ="endDate" value=<?php echo $endDate?> maxlength="30" style="width:150px" /> </br>
+<input type="text" name ="endDate" value=<?php echo "'" . $endDate . "'" ?> maxlength="30" style="width:150px" /> </br>
 
 </p>
 
 
 <p><strong>Achievements: </strong><br/>
 
-<input type="text" name ="achievements" value=<?php echo $achievements?> maxlength="100" style="width: 500px; height:100px; " /> </br>
+<input type="text" name ="achievements" value=<?php echo "'" . $achievements . "'" ?> maxlength="100" style="width: 500px; height:100px; " /> </br>
 
 </p>
 
@@ -169,7 +169,7 @@ mysql_close($link);
 
 <p><strong>Reason for Leaving: </strong><br/>
 
-<input type="text" name ="reason" maxlength="100" size="100" value=<?php echo $reason?> /> </br>
+<input type="text" name ="reason" maxlength="100" size="100" value=<?php echo "'" . $reason . "'" ?> /> </br>
 
 </p>
 

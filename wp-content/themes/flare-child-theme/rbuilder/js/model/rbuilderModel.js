@@ -88,6 +88,25 @@ rbuildermvc.factory('rbuilderStorage', function () {
                 async: false
             });
         }
+        getResumeId: function()
+        {
+            $.ajax({
+                type: "GET",
+                //url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/getResumeId.php",
+                url: "http://dev1.arrowresumebuilder.com/wp-content/themes/flare-child-theme/rbuilder/js/model/getResumeId.php",
+                async: false
+            });
+        }
+        putResumeId: function(resumeID)
+        {
+            $.ajax({
+                type: "POST",
+                //url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/putResumeId.php",
+                url: "http://dev1.arrowresumebuilder.com/wp-content/themes/flare-child-theme/rbuilder/js/model/putResumeId.php",
+                data: { 'resumeID': resumeID },
+                async: false
+            });
+        }
      
     };
 });

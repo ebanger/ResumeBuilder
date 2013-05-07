@@ -45,6 +45,11 @@ if($_POST){
     $city = $_POST['city'];
     $state = $_POST['state'];
 
+$query = sprintf("SELECT * from employment where userID='" . $current_ID ."'");
+
+$result = mysql_query($query);
+
+$num = mysql_num_rows($result);
 if($num > 0){
     $query = "UPDATE education SET schoolName = '$schoolName', gradyear = '$gradyear', degreeType = '$degreeType', degree = '$degree', gpa = '$gpa', honors = '$honors', city = '$city', state = '$state' WHERE userID = '$current_ID'";
 } elseif($num == 0) {
@@ -57,13 +62,13 @@ mysql_close($link);
 ?>
 
 <form method="post" action="<?php $_PHP_SELF ?>">
-<p><strong> School: </strong> <br/> <input type="text" name="schoolName" maxlength="30" size="30" value=<?php echo $schoolName ?> /> <br/> <br/> </p>
+<p><strong> School: </strong> <br/> <input type="text" name="schoolName" maxlength="30" size="30" value=<?php echo "'" . $schoolName . "'" ?> /> <br/> <br/> </p>
 <p><strong> City: </strong><br/>  <input type="text"name="city"  maxlength="20" size="20" value=<?php echo "'" . $city . "'" ?> /> <br/>  <br/> </p>
-<p><strong> State: </strong> <br/> <input type="text" name="state"  maxlength="30" size="30" value=<?php echo $state ?> /> <br/> <br/> </p>
-<p><strong> Degree: </strong> <br/> <input type="text" name="degreeType" maxlength="30" size="30" value=<?php echo $degreeType?> /> <br/> <br/> </p>
-<p><strong> Major: </strong> </br>  <input type="text" name="degree" maxlength="20" size="20" value=<?php echo $degree?> /> <br/> <br/> </p>
-<p><strong> Graduated Year: </strong> </br>  <input type="text" name="gradyear" maxlength="20" size="20" value=<?php echo $gradyear ?> /> <br/> <br/> </p>
-<p><strong> GPA: </strong> </br>  <input type="text" name="gpa" maxlength="4" size="4" value=<?php echo $gpa ?> /> <br/> <br/> </p>
+<p><strong> State: </strong> <br/> <input type="text" name="state"  maxlength="30" size="30" value=<?php echo "'" . $state . "'"?> /> <br/> <br/> </p>
+<p><strong> Degree: </strong> <br/> <input type="text" name="degreeType" maxlength="30" size="30" value=<?php echo "'" . $degreeType . "'"?> /> <br/> <br/> </p>
+<p><strong> Major: </strong> </br>  <input type="text" name="degree" maxlength="20" size="20" value=<?php echo "'" . $degree . "'" ?> /> <br/> <br/> </p>
+<p><strong> Graduated Year: </strong> </br>  <input type="text" name="gradyear" maxlength="20" size="20" value=<?php echo "'" . $gradyear . "'" ?> /> <br/> <br/> </p>
+<p><strong> GPA: </strong> </br>  <input type="text" name="gpa" maxlength="4" size="4" value=<?php echo "'" . $gpa . "'" ?> /> <br/> <br/> </p>
 <p><strong> Honors: </strong> </br>  <input type="text" name="honors" maxlength="20" size="20" value=<?php echo "'" . $honors . "'" ?> /> <br/> <br/> </p>
 <p><input type="submit" name = "Submit" value = "Submit" /></p>    <br/> <br/>
 

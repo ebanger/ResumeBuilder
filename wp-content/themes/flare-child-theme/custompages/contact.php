@@ -119,29 +119,29 @@ mysql_close($link);
 
 <form method="post" action="<?php $_PHP_SELF ?>">
 <p><strong>Email Address:</strong><br/>
-<label type="text" name="email" value=<?php echo $email; ?> /> </br>
+<input type="text" name="email" value=<?php echo "'" . $email . "'" ?> /> </br>
 <p>
 <strong>Street Address: </strong><br/>
-<input type="text" name ="address1"  maxlength="75" size="75"  value=<?php echo $address1; ?> /> </br>
-<input type="text" name ="address2" maxlength="75" size="75" value=<?php echo $ $address2; ?> />
+<input type="text" name ="address1"  maxlength="75" size="75"  value=<?php echo "'" . $address1 . "'" ?> /> </br>
+<input type="text" name ="address2" maxlength="75" size="75" value=<?php echo "'" . $address2 . "'" ?> />
 </p>
     
 <p><strong>City:</strong><br/>
-<input type="text" name="city" maxlength="20" size="20" value=<?php echo $city; ?> /> </br>
+<input type="text" name="city" maxlength="20" size="20" value=<?php echo "'" . $city . "'" ?> /> </br>
 </p>
     
 <p><strong>State:</strong><br/>
-<input type="text" name="state" maxlength="2" size="2" value=<?php echo $state; ?> /> </br>
+<input type="text" name="state" maxlength="2" size="2" value=<?php echo "'" . $state . "'" ?> /> </br>
 </p><p><strong>Postal Code:</strong><br/>
-<input type="text" name="zip" maxlength="6" size="6" value=<?php echo $zip; ?> /> </br>
+<input type="text" name="zip" maxlength="6" size="6" value=<?php echo "'" . $zip . "'" ?> /> </br>
 </p>
 
 <p><strong>Primary Phone:</strong><br/>
-<input type="text" name="phone1" maxlength="10" size="10" value=<?php echo $phone1; ?> /> </br>
+<input type="text" name="phone1" maxlength="10" size="10" value=<?php echo "'" . $phone1 . "'" ?> /> </br>
 </p>
 
 <p><strong>Secondary Phone:</strong><br/>
-<input type="text" name="phone2" maxlength="10" size="10" value=<?php echo $phone2; ?> /> </br>
+<input type="text" name="phone2" maxlength="10" size="10" value=<?php echo "'" . $phone2 . "'" ?> /> </br>
 </p>
 
 
