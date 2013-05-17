@@ -3,9 +3,9 @@
     function getData()
     {
 
-        $current_dude = wp_get_current_user();
+        //$current_dude = wp_get_current_user();
 
-        $current_user = $current_dude->user_login;
+        $current_user = $_GET['currentUser'];//$current_dude->user_login;
         
         $link = mysql_connect('localhost', 'themaro0_dev1', 'buildaresume!1');
         if (!$link)

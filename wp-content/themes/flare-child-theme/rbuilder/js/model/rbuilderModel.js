@@ -4,7 +4,7 @@
 /* Service to retrieve resumes from database */
 rbuildermvc.factory('rbuilderStorage', function () {
     return {
-        get: function() {
+        get: function(currentUser) {
 
             var resume;
 
@@ -13,7 +13,7 @@ rbuildermvc.factory('rbuilderStorage', function () {
                 //url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/getData.php",
                 url: "http://dev1.arrowresumebuilder.com/wp-content/themes/flare-child-theme/rbuilder/js/model/getData.php",
                 async: false,
-
+                data:{'currentUser':currentUser},
                 success: function(data){
                     resume = jQuery.parseJSON(data);
                 }
@@ -38,7 +38,7 @@ rbuildermvc.factory('rbuilderStorage', function () {
             return resume;
         },
 
-        getResumeList: function()
+        getResumeList: function(currentUser)
         {
             var resumeList;
             $.ajax({
@@ -46,7 +46,7 @@ rbuildermvc.factory('rbuilderStorage', function () {
                 //url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/getResumeList.php",
                 url: "http://dev1.arrowresumebuilder.com/wp-content/themes/flare-child-theme/rbuilder/js/model/getResumeList.php",
                 async: false,
-                //data: {'userID': userID},
+                data: {'currentUser': currentUser},
                 success: function(data){
                     resumeList = jQuery.parseJSON(data);
                 }
@@ -55,13 +55,13 @@ rbuildermvc.factory('rbuilderStorage', function () {
 
         },
 
-        put: function(resume)
+        put: function(currentUser, resume)
         {
             $.ajax({
                 type: "POST",
                 //url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/putData.php",
                 url: "http://dev1.arrowresumebuilder.com/wp-content/themes/flare-child-theme/rbuilder/js/model/putData.php",
-                data: { 'resume': resume},
+                data: { 'currentUser': currentUser, 'resume': resume},
                 async: false
 
             });
@@ -87,23 +87,30 @@ rbuildermvc.factory('rbuilderStorage', function () {
                 data: { 'resumeID': resumeID },
                 async: false
             });
-        }
-        getResumeId: function()
+        },
+
+        getResumeId: function(currentUser)
         {
+            var currentResumeId;
             $.ajax({
                 type: "GET",
                 //url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/getResumeId.php",
                 url: "http://dev1.arrowresumebuilder.com/wp-content/themes/flare-child-theme/rbuilder/js/model/getResumeId.php",
-                async: false
+                async: false,
+                success: function(data){
+                    currentResumeId = data;
+                }
             });
-        }
-        putResumeId: function(resumeID)
+            return currentResumeId;
+        },
+
+        putResumeId: function(currentUser,resumeID)
         {
             $.ajax({
                 type: "POST",
                 //url: "http://localhost/ResumeBuilder/wp-content/themes/flare-child-theme/rbuilder/js/model/putResumeId.php",
                 url: "http://dev1.arrowresumebuilder.com/wp-content/themes/flare-child-theme/rbuilder/js/model/putResumeId.php",
-                data: { 'resumeID': resumeID },
+                data: {'currentUser': currentUser, 'resumeID': resumeID },
                 async: false
             });
         }

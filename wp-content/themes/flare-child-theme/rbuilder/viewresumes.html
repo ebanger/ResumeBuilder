@@ -28,17 +28,16 @@
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/app.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/controller/rbuilderCtrl.js"></script>
 	<script src="/wp-content/themes/flare-child-theme/rbuilder/js/model/rbuilderModel.js"></script>
-	
-	<script>
-	loadResume = function(){
 
-		
-	}
-	</script>
 </head>
 
 <body>
-	<section id="rbuilderapp" style="height:842px;width:595px;margin-left:auto;margin-right:auto;border:1px solid black;" ng-controller="rbuilderCtrl" >
+	<section id="rbuilderapp" style="height:842px;width:595px;margin-left:auto;margin-right:auto;border:1px solid black;" ng-controller="rbuilderCtrl" ng-init = "init(<?php
+		$current_dude = wp_get_current_user();
+
+        $current_user = $current_dude->user_login;
+
+        echo "'" . $current_user ."'"; ?>)">
 	<h1>My Resumes</h1>
 	<section id="list" ng-model="resumeList.resumes">
 		<div id="resumeDiv" ng-repeat="resumes in resumeList.resumes">
@@ -53,8 +52,8 @@
 		</div>
 	</section>
 	<br>
-	<form action="/build-a-resume/">
-		<input type="submit" value="Create New Resume">
+	<form action="/rbuilder/">
+		<input type="submit" ng-click="generateResume()" value="Generate New Resume">
 	</form>
 </section>
 	

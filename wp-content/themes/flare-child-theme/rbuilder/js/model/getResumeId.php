@@ -1,13 +1,18 @@
 <?php
     header('Access-Control-Allow-Origin: *');
-    
+    $path = $_SERVER['DOCUMENT_ROOT'];
+    $path .= 'wp-includes/pluggable.php';
+    include($path);
+
     function getResumeId()
     {
 
-        $current_dude = wp_get_current_user();
+        //$current_dude = wp_get_current_user();
 
-        $current_user = $current_dude->user_login;
-        
+        $current_user = $_GET['currentUser']; //$current_dude->user_login;
+
+        echo $current_user;
+
         $link = mysql_connect('localhost', 'themaro0_dev1', 'buildaresume!1');
         if (!$link)
         {
@@ -26,7 +31,7 @@
 
         $num = mysql_result($result, 0);
 
-        return $num;
+        echo $num;
 
     }
     getResumeId();

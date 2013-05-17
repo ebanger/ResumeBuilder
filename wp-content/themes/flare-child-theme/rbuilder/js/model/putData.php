@@ -2,17 +2,12 @@
 	header('Access-Control-Allow-Origin: *');
 
     $stringData = $_POST['resume']; 
-
+    $current_user = $_POST['currentUser'];
     //SETUP SQL LINK//
     
-    $current_dude = wp_get_current_user();
+    //$current_dude = wp_get_current_user();
 
-    $current_user = $current_dude->user_login;
-
-    $query = sprintf("SELECT userID from users where email='" . $current_user ."'");
-    $result = mysql_query($query);
-
-    $current_ID = mysql_result($result, 0);
+    
 
 	$link = mysql_connect('localhost', 'themaro0_dev1', 'buildaresume!1');
 	if (!link)
@@ -25,7 +20,11 @@
     {
 		die('Cant use DB: ' . mysql_error());
 	}
+	
+	$query = sprintf("SELECT userID from users where email='" . $current_user ."'");
+    $result = mysql_query($query);
 
+    $current_ID = mysql_result($result, 0);
 
 
 	//Write the data to SQL//
@@ -43,5 +42,17 @@
 	        die('Could not query: ' . mysql_error());
 	    }
 	}
+
+	// Make new resumeID current resumeID for user.
+	$query = sprintf("SELECT resumeID FROM resume WHERE resumeData = '" . json_encode($stringData) ."' ");
+
+	$result = mysql_query($query);
+
+	$currentResumeId = mysql_result($result, 0);
+
+	$query = sprintf("UPDATE users SET currentResume = '$currentResumeId' WHERE userID = '$current_ID'");
+
+	mysql_query($query);
+
     mysql_close($link);
 ?>

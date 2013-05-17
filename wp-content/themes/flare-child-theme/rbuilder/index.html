@@ -33,7 +33,12 @@
 
 </head>
 
-<body ng-controller="rbuilderCtrl">
+<body ng-controller="rbuilderCtrl" ng-init = "init(<?php
+		$current_dude = wp_get_current_user();
+
+        $current_user = $current_dude->user_login;
+
+        echo "'" . $current_user ."'";?>)">
 	<script>
   		savePDF = function(){
 			$.ajax({
@@ -81,9 +86,15 @@
 						<b>{{item.schoolName}}</b> {{item.dateGrad}}
 						<b>{{item.companyName}}</b> {{item.beginDate}} <i>{{item.endDate}}</i>
 						<li id="items">
+							{{item.city}} {{item.state}}
+							{{item.degreeType}} {{item.degree}} {{item.dateGrad}}
 							{{item.gpa}}
+							{{item.honors}}
 							{{item.answerData}}
 							{{item.jobTitle}}
+							{{item.city}} {{item.state}}
+							{{item.achievements}}
+							{{item.reason}}
 						</li>
 					</div>
 				</section>

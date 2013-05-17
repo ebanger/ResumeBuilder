@@ -2,9 +2,9 @@
     header('Access-Control-Allow-Origin: *');
 	function getData()
 	{
-		$current_user = wp_get_current_user();
+		//$current_user = wp_get_current_user();
         
-
+        $current_user = $_GET['currentUser']; 
 		$link = mysql_connect('localhost', 'themaro0_dev1', 'buildaresume!1');
 		if (!$link)
         {
@@ -17,7 +17,7 @@
 			die('Cant use DB: ' . mysql_error());
 		}
 
-        $query = sprintf("SELECT userID from users where email='" . $current_user->user_login ."'");
+        $query = sprintf("SELECT userID from users where email='" . $current_user ."'");
         $result = mysql_query($query);
 
         $current_ID = mysql_result($result, 0);
